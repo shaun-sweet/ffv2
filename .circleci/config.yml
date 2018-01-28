@@ -80,6 +80,8 @@ workflows:
                 - dev
                 - master
       - build:
+          requires: 
+            - install_dependencies
           filters:
             branches:
               only:
@@ -93,6 +95,8 @@ workflows:
               only:
                 - dev
       - build_for_production:
+          requires:
+            - install_dependencies
           filters:
             branches:
               only:
