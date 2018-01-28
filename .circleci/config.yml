@@ -19,7 +19,6 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-
       - run: 
           name: Install Deps
           command: yarn
@@ -31,12 +30,12 @@ jobs:
           root: /tmp
           paths:
             - ffv2
-    build:
-      <<: *defaults
-      steps:
-        - run:
-            name: Build Project
-            command: yarn run build
+  build:
+    <<: *defaults
+    steps:
+      - run:
+          name: Build Project
+          command: yarn run build
   deploy_to_prod:
     <<: *defaults
     steps:
