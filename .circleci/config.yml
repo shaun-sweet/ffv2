@@ -84,3 +84,10 @@ workflows:
             branches:
               only:
                 - dev
+  test-build:
+    jobs:
+      - build:
+        filters:
+          branches:
+            only:
+              - /renovate.*/
