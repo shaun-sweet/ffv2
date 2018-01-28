@@ -1,6 +1,6 @@
 # Javascript Node CircleCI 2.0 configuration file
 #
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details test
 #
 defaults: &defaults
   working_directory: /tmp/ffv2
@@ -9,7 +9,7 @@ defaults: &defaults
   
 version: 2
 jobs:
-  build:
+  installDeps:
     <<: *defaults
     steps:
       - checkout
@@ -19,7 +19,6 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-
       - run: 
           name: Install Deps
           command: yarn
@@ -31,6 +30,14 @@ jobs:
           root: /tmp
           paths:
             - ffv2
+  build:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /tmp
+      - run:
+          name: Build Project
+          command: yarn run build
   deploy_to_prod:
     <<: *defaults
     steps:
@@ -64,7 +71,7 @@ workflows:
   version: 2
   build-n-deploy:
     jobs:
-      - build:
+      - installDeps:
           filters:
             branches:
               only:
@@ -72,22 +79,29 @@ workflows:
                 - master
       - deploy_to_prod:
           requires: 
-            - build
+            - installDeps
           filters:
             branches:
               only:
                 - master
       - deploy_to_dev:
           requires:
-            - build
+            - installDeps
           filters:
             branches:
               only:
                 - dev
   test-build:
     jobs:
+      - installDeps:
+          filters:
+            branches:
+              only:
+                - /renovate.*/
       - build:
-        filters:
-          branches:
-            only:
-              - /renovate.*/
+          requires:
+            - installDeps
+          filters:
+            branches:
+              only:
+                - /renovate.*/
