@@ -38,6 +38,10 @@ jobs:
       - run:
           name: Build Project
           command: yarn run build
+      - persist_to_workspace: 
+          root: /tmp
+          paths:
+            - ffv2
   build_for_production:
     <<: *defaults
     steps:
