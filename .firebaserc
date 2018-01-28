@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "firefly-client-2ccd2"
+    "dev": "firefly-client-2ccd2",
+    "prod": "ff-test-prod"
   }
 }
