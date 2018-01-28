@@ -9,7 +9,7 @@ defaults: &defaults
   
 version: 2
 jobs:
-  installDeps:
+  install_dependencies:
     <<: *defaults
     steps:
       - checkout
@@ -71,7 +71,7 @@ workflows:
   version: 2
   build-n-deploy:
     jobs:
-      - installDeps:
+      - install_dependencies:
           filters:
             branches:
               only:
@@ -79,28 +79,28 @@ workflows:
                 - master
       - deploy_to_prod:
           requires: 
-            - installDeps
+            - install_dependencies
           filters:
             branches:
               only:
                 - master
       - deploy_to_dev:
           requires:
-            - installDeps
+            - install_dependencies
           filters:
             branches:
               only:
                 - dev
   test-build:
     jobs:
-      - installDeps:
+      - install_dependencies:
           filters:
             branches:
               only:
                 - /renovate.*/
       - build:
           requires:
-            - installDeps
+            - install_dependencies
           filters:
             branches:
               only:
