@@ -9,7 +9,7 @@ defaults: &defaults
   
 version: 2
 jobs:
-  installDeps:
+  install_dependencies:
     <<: *defaults
     steps:
       - checkout
@@ -38,7 +38,11 @@ jobs:
       - run:
           name: Build Project
           command: yarn run build
-  deploy_to_prod:
+      - persist_to_workspace: 
+          root: /tmp
+          paths:
+            - ffv2
+  build_for_production:
     <<: *defaults
     steps:
       - attach_workspace:
@@ -46,6 +50,11 @@ jobs:
       - run: 
           name: Build project for deploy
           command: DEPLOY_ENV=prod yarn run build
+  deploy_to_prod:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /tmp
       - run: 
           name: Switch firebase project to prod
           command: ./node_modules/.bin/firebase use prod
@@ -57,9 +66,6 @@ jobs:
     steps:
       - attach_workspace:
           at: /tmp
-      - run: 
-          name: Build project for deploy
-          command: yarn run build
       - run:
           name: Switch firebase project to dev
           command: ./node_modules/.bin/firebase use dev
@@ -71,36 +77,52 @@ workflows:
   version: 2
   build-n-deploy:
     jobs:
-      - installDeps:
+      - install_dependencies:
           filters:
             branches:
               only:
                 - dev
+                - master
+      - build:
+          requires: 
+            - install_dependencies
+          filters:
+            branches:
+              only:
+                - dev
+      - deploy_to_dev:
+          requires:
+            - install_dependencies
+            - build
+          filters:
+            branches:
+              only:
+                - dev
+      - build_for_production:
+          requires:
+            - install_dependencies
+          filters:
+            branches:
+              only:
                 - master
       - deploy_to_prod:
           requires: 
-            - installDeps
+            - install_dependencies
+            - build_for_production
           filters:
             branches:
               only:
                 - master
-      - deploy_to_dev:
-          requires:
-            - installDeps
-          filters:
-            branches:
-              only:
-                - dev
   test-build:
     jobs:
-      - installDeps:
+      - install_dependencies:
           filters:
             branches:
               only:
                 - /renovate.*/
       - build:
           requires:
-            - installDeps
+            - install_dependencies
           filters:
             branches:
               only:
