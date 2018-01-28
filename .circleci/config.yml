@@ -33,6 +33,8 @@ jobs:
   build:
     <<: *defaults
     steps:
+      - attach_workspace:
+          at: /tmp
       - run:
           name: Build Project
           command: yarn run build
