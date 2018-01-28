@@ -91,11 +91,6 @@ workflows:
                 - dev
   test-build:
     jobs:
-      - installDeps:
-          filters:
-            branches:
-              only:
-                - /renovate.*/
       - build:
           requires:
             - installDeps
