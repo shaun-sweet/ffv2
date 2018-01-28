@@ -70,7 +70,6 @@ workflows:
               only:
                 - dev
                 - master
-                - /renovate*/
       - deploy_to_prod:
           requires: 
             - build
@@ -85,3 +84,10 @@ workflows:
             branches:
               only:
                 - dev
+  test-build:
+    jobs:
+      - build:
+        filters:
+          branches:
+            only:
+              - /renovate.*/
