@@ -98,6 +98,8 @@ workflows:
             only:
               - /renovate.*/
       - lint:
+        requires:
+          - build
         filters:
           branches:
             only:
