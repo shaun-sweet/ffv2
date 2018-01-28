@@ -1,7 +1,5 @@
-# Quasar PWA App
-
-> A Quasar PWA project
-
+## Firefly v2
+Soon!
 ## Build Setup
 
 ``` bash
