@@ -9,7 +9,7 @@ defaults: &defaults
   
 version: 2
 jobs:
-  build:
+  installDeps:
     <<: *defaults
     steps:
       - checkout
@@ -31,6 +31,12 @@ jobs:
           root: /tmp
           paths:
             - ffv2
+    build:
+      <<: *defaults
+      steps:
+        - run:
+            name: Build Project
+            command: yarn run build
   deploy_to_prod:
     <<: *defaults
     steps:
@@ -64,7 +70,7 @@ workflows:
   version: 2
   build-n-deploy:
     jobs:
-      - build:
+      - installDeps:
           filters:
             branches:
               only:
@@ -72,21 +78,28 @@ workflows:
                 - master
       - deploy_to_prod:
           requires: 
-            - build
+            - installDeps
           filters:
             branches:
               only:
                 - master
       - deploy_to_dev:
           requires:
-            - build
+            - installDeps
           filters:
             branches:
               only:
                 - dev
   test-build:
     jobs:
+      - installDeps:
+          filters:
+            branches:
+              only:
+                - /renovate.*/
       - build:
+          requires:
+            - installDeps
           filters:
             branches:
               only:
