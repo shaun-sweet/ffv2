@@ -1,6 +1,4 @@
-# Quasar PWA App
-
-> A Quasar PWA project
+## Firefly v2
 
 ## Build Setup
 
