@@ -1,30 +1,27 @@
 <template>
   <!-- Don't drop "q-app" class -->
   <div id="q-app">
+    
     <header></header>
     <main>
-      <img src="~assets/quasar-logo-full.svg" alt="Quasar PWA">
       <router-view></router-view>
+      <q-spinner :size="30"/>
     </main>
   </div>
 </template>
 
 <script>
-/*
- * Root component
- */
-export default {}
+
+export default {
+  mounted () {
+    this.$q.events.$on('app:loading', state => {
+      console.log(`Loading has become ${state ? 'visible' : 'hidden'}`)
+    })
+  }
+}
 </script>
 
 <style lang="stylus">
 @import '~variables'
 
-main
-  text-align center
-  margin-top 40px
-
-header
-  margin 0
-  height 10px
-  background-color $primary
 </style>

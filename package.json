@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "babel-runtime": "6.26.0",
+    "firebase": "^4.9.0",
     "firebase-tools": "3.17.4",
     "quasar-extras": "1.0.2",
     "quasar-framework": "0.14.7",
