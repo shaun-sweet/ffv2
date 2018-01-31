@@ -121,6 +121,8 @@ workflows:
               only:
                 - dev
       - get_env_config:
+          requires: 
+            - install_dependencies
           filters:
             branches:
               only:
