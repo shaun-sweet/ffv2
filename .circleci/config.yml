@@ -37,14 +37,13 @@ jobs:
           at: /tmp
       - run:
           name: Pull config file
-          command:
-            - >-
-              curl https://demo.confighub.com/rest/rawFile
-              -H "Client-Token: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDb25maWdIdWIiLCJyaWQiOjEzMTksInRzIjoxMjQ5NjYyNjYxfQ.EE41ndiU00oGMJyiiV8mjbpe6CajYTtgwnIaiPNmjE4"
-              -H "Context: dev;firefly"
-              -H "File: .env"
-              -H "Application-Name: web-ui"
-              -o ".env"
+          command: |
+            curl https://demo.confighub.com/rest/rawFile
+            -H "Client-Token: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDb25maWdIdWIiLCJyaWQiOjEzMTksInRzIjoxMjQ5NjYyNjYxfQ.EE41ndiU00oGMJyiiV8mjbpe6CajYTtgwnIaiPNmjE4"
+            -H "Context: dev;firefly"
+            -H "File: .env"
+            -H "Application-Name: web-ui"
+            -o ".env"
       - persist_to_workspace: 
           root: /tmp
           paths:
