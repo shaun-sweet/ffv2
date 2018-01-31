@@ -37,13 +37,7 @@ jobs:
           at: /tmp
       - run:
           name: Pull config file
-          command: |
-            curl https://demo.confighub.com/rest/rawFile -H \
-            "Client-Token: $CONFIG_KEY" -H \
-            "Context: dev;firefly" -H \
-            "File: .env" -H \
-            "Application-Name: web-ui" \
-            -o ".env"
+          command: bash ./get_config.sh
       - persist_to_workspace: 
           root: /tmp
           paths:
