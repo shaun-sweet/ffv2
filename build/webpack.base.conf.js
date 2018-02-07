@@ -23,7 +23,11 @@ module.exports = {
     path: path.resolve(__dirname, '../dist'),
     publicPath: config[env.prod ? 'build' : 'dev'].publicPath,
     filename: 'js/[name].js',
-    chunkFilename: 'js/[id].[chunkhash].js'
+    chunkFilename: 'js/[id].[chunkhash].js',
+    devtoolModuleFilenameTemplate: info => {
+      const isJsFile = info.resourcePath.match(/^\.\/src\/.*\.js$/)
+      return `webpack:///${isJsFile ? info.resourcePath.replace('./', '') : info.resourcePath}`
+    }
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],

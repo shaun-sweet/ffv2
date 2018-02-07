@@ -29,11 +29,6 @@ const config = {
 }
 firebase.initializeApp(config)
 
-firebase.auth().onAuthStateChanged((user) => {
-  console.log('LOADED!')
-  console.log(user)
-})
-
 Vue.config.productionTip = false
 Vue.use(Quasar, {
   components: All,
@@ -45,6 +40,11 @@ Vue.use({
   }
 })
 
+firebase.auth().onAuthStateChanged((user) => {
+  console.log('LOADED!')
+  console.log(store)
+  store.dispatch('isLoading', false)
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#q-app',
@@ -54,7 +54,7 @@ new Vue({
 })
 
 if (__THEME === 'mat') {
-  // require('quasar-extras/roboto-font')
+  require('quasar-extras/roboto-font')
 }
 // import 'quasar-extras/material-icons'
 // import 'quasar-extras/ionicons'

@@ -10,16 +10,12 @@ YAY OKAY
 </template>
 
 <script>
-import { Loading } from 'quasar'
+
 export default {
   methods: {
     submitHandler () {
       console.log('heyyyy')
       this.$auth.signInWithEmailAndPassword(this.username, this.password)
-      Loading.show()
-      setTimeout(() => {
-        Loading.hide()
-      }, 3000)
     }
   },
   data () {

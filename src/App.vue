@@ -1,22 +1,39 @@
 <template>
   <!-- Don't drop "q-app" class -->
   <div id="q-app">
-    
-    <header></header>
-    <main>
-      <router-view></router-view>
-      <q-spinner :size="30"/>
-    </main>
+    <div class="entry">
+      <header></header>
+      <main>
+        <button @click="handleClick">HANDLE ME</button>
+        <router-view v-if="isLoading"></router-view>
+        <q-spinner :size="30"/>
+      </main>
+
+    </div>
   </div>
 </template>
 
 <script>
-
+import { mapActions, mapGetters } from 'vuex'
+import {Loading} from 'quasar'
 export default {
   mounted () {
-    this.$q.events.$on('app:loading', state => {
-      console.log(`Loading has become ${state ? 'visible' : 'hidden'}`)
+    this.$store.watch(this.$store.getters.watchLoading, (loading) => {
+      loading ? Loading.show() : Loading.hide()
     })
+  },
+  methods: {
+    handleClick (e) {
+
+    },
+    ...mapActions({
+      toggleLoading: 'isLoading'
+    })
+  },
+  computed: {
+    ...mapGetters([
+      'isLoading'
+    ])
   }
 }
 </script>
