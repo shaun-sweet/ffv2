@@ -12,18 +12,18 @@
   },
   "dependencies": {
     "babel-runtime": "6.26.0",
-    "dotenv": "^5.0.0",
-    "firebase": "^4.9.0",
+    "dotenv": "5.0.0",
+    "firebase": "4.9.1",
     "firebase-tools": "3.17.4",
     "quasar-extras": "1.0.2",
     "quasar-framework": "0.14.7",
     "vue": "2.5.13",
     "vue-router": "3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "7.2.5",
-    "axios": "^0.17.1",
+    "axios": "0.17.1",
     "babel-core": "6.26.0",
     "babel-eslint": "8.2.1",
     "babel-loader": "7.1.2",
@@ -67,7 +67,7 @@
     "vue-loader": "13.7.0",
     "vue-style-loader": "3.1.1",
     "vue-template-compiler": "2.5.13",
-    "webpack": "^3.10.0",
+    "webpack": "3.10.0",
     "webpack-dev-middleware": "2.0.4",
     "webpack-hot-middleware": "2.21.0",
     "webpack-merge": "4.1.1"
