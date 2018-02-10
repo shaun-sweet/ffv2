@@ -36,8 +36,8 @@ jobs:
       - attach_workspace:
           at: /tmp
       - run:
-          name: Pull config file
-          command: bash ./get_config.sh
+          name: Pull config file and write to disk
+          command: yarn run get-config
       - persist_to_workspace: 
           root: /tmp
           paths:

@@ -5,7 +5,7 @@
       <header></header>
       <main>
         <button @click="handleClick">HANDLE ME</button>
-        <router-view v-if="isLoading"></router-view>
+        <router-view v-if="!isLoading"></router-view>
         <q-spinner :size="30"/>
       </main>
 
@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     handleClick (e) {
-
+      this.toggleLoading(true)
     },
     ...mapActions({
       toggleLoading: 'isLoading'
