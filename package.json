@@ -7,18 +7,23 @@
     "clean": "node build/script.clean.js",
     "dev": "node build/script.dev.js",
     "build": "node build/script.build.js",
-    "lint": "eslint --ext .js,.vue src"
+    "lint": "eslint --ext .js,.vue src",
+    "get-config": "node get-config.js"
   },
   "dependencies": {
     "babel-runtime": "6.26.0",
+    "dotenv": "5.0.0",
+    "firebase": "4.9.1",
     "firebase-tools": "3.17.4",
     "quasar-extras": "1.0.2",
     "quasar-framework": "0.14.7",
     "vue": "2.5.13",
-    "vue-router": "3.0.1"
+    "vue-router": "3.0.1",
+    "vuex": "3.0.1"
   },
   "devDependencies": {
-    "autoprefixer": "7.2.5",
+    "autoprefixer": "7.2.6",
+    "axios": "0.17.1",
     "babel-core": "6.26.0",
     "babel-eslint": "8.2.1",
     "babel-loader": "7.1.2",
@@ -27,7 +32,7 @@
     "babel-preset-stage-2": "6.24.1",
     "colors": "1.1.2",
     "connect-history-api-fallback": "1.5.0",
-    "copy-webpack-plugin": "4.3.1",
+    "copy-webpack-plugin": "4.4.1",
     "css-loader": "0.28.9",
     "es6-promise": "4.2.4",
     "eslint": "4.16.0",
@@ -63,7 +68,7 @@
     "vue-style-loader": "3.1.1",
     "vue-template-compiler": "2.5.13",
     "webpack": "3.10.0",
-    "webpack-dev-middleware": "1.12.2",
+    "webpack-dev-middleware": "2.0.4",
     "webpack-hot-middleware": "2.21.0",
     "webpack-merge": "4.1.1"
   }
