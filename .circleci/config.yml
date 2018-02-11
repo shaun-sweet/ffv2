@@ -30,14 +30,26 @@ jobs:
           root: /tmp
           paths:
             - ffv2
-  get_env_config:
+  get_dev_env_config:
     <<: *defaults
     steps:
       - attach_workspace:
           at: /tmp
       - run:
           name: Pull config file and write to disk
-          command: yarn run get-config
+          command: FF_CONFIG_CONTEXT='development;public;live' yarn run get-config
+      - persist_to_workspace: 
+          root: /tmp
+          paths:
+            - ffv2
+  get_prod_env_config:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: /tmp
+      - run:
+          name: Pull config file and write to disk
+          command: FF_CONFIG_CONTEXT='production;public;live' yarn run get-config
       - persist_to_workspace: 
           root: /tmp
           paths:
@@ -98,9 +110,13 @@ workflows:
             branches:
               only:
                 - master
+      - get_prod_env_config:
+          requires: 
+            - install_dependencies
       - build_for_production:
           requires:
             - install_dependencies
+            - get_prod_env_config
           filters:
             branches:
               only:
@@ -108,6 +124,7 @@ workflows:
       - deploy_to_prod:
           requires: 
             - install_dependencies
+            - get_prod_env_config
             - build_for_production
           filters:
             branches:
@@ -120,7 +137,7 @@ workflows:
             branches:
               only:
                 - dev
-      - get_env_config:
+      - get_dev_env_config:
           requires: 
             - install_dependencies
           filters:
@@ -129,7 +146,7 @@ workflows:
                 - dev
       - build:
           requires: 
-            - get_env_config
+            - get_dev_env_config
             - install_dependencies
           filters:
             branches:
@@ -137,7 +154,7 @@ workflows:
                 - dev
       - deploy_to_dev:
           requires:
-            - get_env_config
+            - get_dev_env_config
             - install_dependencies
             - build
           filters:

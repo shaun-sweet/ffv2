@@ -24,6 +24,6 @@ client.get(CONFIG_API_URL)
   .then((res) => {
     fs.writeFile(CONFIG_SAVE_TARGET, res.data, (err) => {
       if (err) throw err
-      console.log('Config details written to disk -> .env')
+      console.log(`"${FF_CONFIG_CONTEXT}" config details written to disk -> .env`)
     })
   })
