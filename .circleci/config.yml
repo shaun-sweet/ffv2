@@ -102,7 +102,7 @@ jobs:
           command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN --non-interactive --only hosting
       - run:
           name: Test VPS deploy
-          command: scp -r dist/* sweet@sr.shaunsweet.com:/var/www/sr.shaunsweet.com/
+          command: scp -oStrictHostKeyChecking=no -r dist/* sweet@sr.shaunsweet.com:/var/www/sr.shaunsweet.com/
 
 workflows:
   version: 2
