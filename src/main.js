@@ -43,7 +43,7 @@ Vue.use({
 firebase.auth().onAuthStateChanged((user) => {
   console.log('LOADED!')
   console.log(store)
-  store.dispatch('isLoading' + user, false)
+  store.dispatch('isLoading', false)
 })
 /* eslint-disable no-new */
 new Vue({
