@@ -40,10 +40,14 @@ Vue.use({
   }
 })
 
+function hi (params) {
+
+}
+
 firebase.auth().onAuthStateChanged((user) => {
   console.log('LOADED!')
   console.log(store)
-  store.dispatch('isLoading', false)
+  store.dispatch('isLoading' + user, false)
 })
 /* eslint-disable no-new */
 new Vue({
