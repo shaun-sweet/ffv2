@@ -16,7 +16,7 @@
     "firebase": "4.9.1",
     "firebase-tools": "3.17.4",
     "quasar-extras": "1.0.2",
-    "quasar-framework": "0.14.7",
+    "quasar-framework": "0.15.10",
     "vue": "2.5.13",
     "vue-router": "3.0.1",
     "vuex": "3.0.1"
